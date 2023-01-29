@@ -1,5 +1,5 @@
 /**
- * This file makes sure that we can get a storage that us unique to the current request context
+ * This file makes sure that we can get a storage that is unique to the current request context
  */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/ban-types */

@@ -6,6 +6,7 @@ import { Inputs } from "~/shared/utils";
 
 export function CreatePostForm() {
   const addPost = trpc.post.add.useMutation();
+  const utils = trpc.useContext();
 
   const router = useRouter();
 
@@ -28,7 +29,11 @@ export function CreatePostForm() {
           text: values.text as string,
         };
         try {
-          await addPost.mutateAsync(input);
+          await addPost.mutateAsync(input, {
+            onSuccess: () => {
+              utils.post.list.invalidate();
+            },
+          });
 
           $form.reset();
         } catch (cause) {

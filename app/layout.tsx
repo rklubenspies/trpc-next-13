@@ -4,6 +4,7 @@ import Link from "next/link";
 import { PropsWithChildren, use } from "react";
 import { ClientProvider } from "~/client/trpcClient";
 import { rsc } from "../server-rsc/trpc";
+import { TRPCDevTools } from "~/client/TRPCDevTools";
 
 export default function RootLayout(props: PropsWithChildren) {
   const user = use(rsc.whoami.fetch());
@@ -32,6 +33,11 @@ export default function RootLayout(props: PropsWithChildren) {
                 </Link>
               </li>
               <li>
+                <Link href='/whoami' className='text-indigo-500 underline'>
+                  WHOAMI
+                </Link>
+              </li>
+              <li>
                 {user ? (
                   <>
                     Hi <em>{user.name}</em>.{" "}
@@ -50,7 +56,10 @@ export default function RootLayout(props: PropsWithChildren) {
             </ul>
           </nav>
 
-          <main>{props.children}</main>
+          <main>
+            {props.children}
+            <TRPCDevTools />
+          </main>
         </body>
       </html>
     </ClientProvider>
